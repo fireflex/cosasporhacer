@@ -11,6 +11,7 @@ use Illuminate\Http\Response;
 
 class TareaController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -18,10 +19,14 @@ class TareaController extends Controller
      */
     public function index()
     {
-        $categorias = Categoria::all();
-        $tareas = Tarea::all();
-        return \View::make("tareas.lista")->with(['categorias'=>$categorias, "tareas" => $tareas]);
-    }
+        if (!session('logueado')) {
+           return redirect()->action('UsuarioController@index');
+       }
+
+       $categorias = Categoria::all();
+       $tareas = Tarea::all();
+       return \View::make("tareas.lista")->with(['categorias'=>$categorias, "tareas" => $tareas]);
+   }
 
     /**
      * Show the form for creating a new resource.
@@ -132,8 +137,9 @@ public function search(Request $request)
     return response()->json([$arr]);
 }
 
-    public function destroy($id)
-    {
+
+public function destroy($id)
+{
         //
-    }
+}
 }

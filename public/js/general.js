@@ -29,6 +29,13 @@ Parsley.setLocale('es');
 $('#login').parsley();
 $('#crear-tarea').parsley();
 
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+
+
 $('#login').submit(function(event) {
   event.preventDefault();
   var dataLogin = $('#login').serialize();
@@ -59,12 +66,6 @@ $('#login').submit(function(event) {
     });
 });
 
-
-$.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
-});
 $('#crear-tarea').submit(function(event) {
   event.preventDefault();
   var dataTarea = $(this).serialize();

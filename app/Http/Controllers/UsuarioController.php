@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
@@ -13,8 +15,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $name = 'jaime';
-        return \View::make("usuarios.login")->with("name", $name);
+        return \View::make("usuarios.login");
     }
 
     /**
@@ -28,9 +29,23 @@ class UsuarioController extends Controller
     }
 
 
-    public function login()
+    public function login(Request $request)
     {
-     return Response::json(['success' => 1], 200);
+        $usuario = $request->input('usuario');
+        $password =  sha1($request->input('password'));
+
+        $validaLogin = DB::table('usuarios')
+        ->where('usuario', '=', $usuario)
+        ->where('password', '=', $password)
+        ->first();     
+
+        if($validaLogin){
+            session(['logueado' => true, 'nombre' => $validaLogin->nombre]);
+            return response()->json(['type'=> 'success', 'message' => url('/').'/mistareas/']);
+        } 
+
+         return response()->json(['type'=> 'error', 'message' => 'Los datos son incorrectos']);
+
     }
 
     /**
