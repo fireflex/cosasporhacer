@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Categoria;
 use App\Tarea;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -103,12 +104,12 @@ class TareaController extends Controller
 
     public function status(Request $request)
     {
-       $tareaId = $request->input('valor');
-       $marcado = (boolean)$request->input('marcado');
+     $tareaId = $request->input('valor');
+     $marcado = (boolean)$request->input('marcado');
 
-       $tareaModel = Tarea::find($tareaId);
-       $tareaModel->realizada = 0;
-       if($marcado){
+     $tareaModel = Tarea::find($tareaId);
+     $tareaModel->realizada = 0;
+     if($marcado){
         $tareaModel->realizada = 1;
     } 
     $tareaModel->save();
@@ -116,12 +117,21 @@ class TareaController extends Controller
 
 }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
+public function search(Request $request)
+{
+    $cadena = $request->input('cadena');
+    $tareas = DB::table('tareas')
+    ->join('categorias', 'categorias.id', '=', 'tareas.categoria_id')
+    ->where('tarea', 'like', '%'.$cadena)
+    ->get();
+    $arr = [];
+    foreach ($tareas as $tarea) {
+        $arr[] = $tarea->tarea.' - '.$tarea->nombre;
+    }
+    return response()->json([$arr]);
+}
+
     public function destroy($id)
     {
         //

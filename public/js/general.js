@@ -129,7 +129,7 @@ $('.marcar-tarea').on('click', function(event) {
     }
   })
   }else{
-      $.ajax({
+    $.ajax({
       url: '/mistareas/estado',
       type: 'POST',
       dataType: 'json',
@@ -139,6 +139,22 @@ $('.marcar-tarea').on('click', function(event) {
   }
 
 } );
+
+$('#filtro').typeahead({
+            source: function (query, result) {
+                $.ajax({
+                    url: "mistareas/filtro",
+          data: 'cadena=' + query,            
+                    dataType: "json",
+                    type: "POST",
+                    success: function (data) {
+            result($.map(data, function (item) {
+              return item;
+                        }));
+                    }
+                });
+            }
+        });
 
 
 }); // End Jquery

@@ -17,3 +17,4 @@ Route::post('login', array('uses' => 'UsuarioController@login'));
 Route::get('/mistareas', 'TareaController@index');
 Route::post('/mistareas/add', 'TareaController@store');
 Route::post('/mistareas/estado', 'TareaController@status');
+Route::post('/mistareas/filtro', 'TareaController@search');

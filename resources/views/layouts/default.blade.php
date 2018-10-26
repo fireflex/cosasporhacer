@@ -23,6 +23,7 @@
     <script src="{{ asset('/js/bootstrap.min.js') }}"></script>   
     <script src="{{ asset('/js/parsley.min.js') }}"></script>   
     <script src="{{ asset('/js/overhang.min.js') }}"></script>   
+    <script src="{{ asset('/js/bootstrap3-typeahead.min.js') }}"></script>   
     <script src="{{ asset('/js/general.js') }}"></script>   
 </body>
 </html>

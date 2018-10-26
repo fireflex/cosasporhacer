@@ -5,7 +5,7 @@
 </div>
 <div class="row" style="margin-bottom:30px;">
   <div class="col-md-4 col-lg-4 col-md-offset-8">
-    <input type="text" name="filtro" placeholder="Buscar una tarea" id="filtro" class="form-control">
+    <input type="text" name="filtro" placeholder="Buscar una tarea" id="filtro" class="form-control typeahead" data-provide="typeahead" autocomplete="off">
   </div>
 </div>
     <div class="jumbotron">
