@@ -1,10 +1,12 @@
 # Cosasporhacer
 APP para llevar el control de las tareas diarias.
 # Funciones
+ Login de usuario  
  Filtro de tareas  
  Agregar tareas asociando una categoria  
  Marcado de tareas realizadas  
  Borrado de tarea  
+ 
 
 # Desarrollado en Framework PHP LARAVEL V5.7 y base de datos MYSQL.
 # Herramientas usadas:
