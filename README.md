@@ -6,9 +6,9 @@ APP para llevar el control de las tareas diarias.
  Marcado de tareas realizadas
  Borrado de tarea
 
-#Desarrollado en LARAVEL 5.7
-#Base de datos: MYSQL
-#Herramientas usadas:
+# Desarrollado en LARAVEL 5.7
+# Base de datos: MYSQL
+# Herramientas usadas:
 Bootstrap v3: https://getbootstrap.com/
 Jquery v3.2: https://jquery.com/ 
 Bootstrap Typehead: https://github.com/bassjobsen/Bootstrap-3-Typeahead
