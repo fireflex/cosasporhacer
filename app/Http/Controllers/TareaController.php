@@ -103,16 +103,16 @@ class TareaController extends Controller
 
     public function status(Request $request)
     {
-     $tareaId = $request->input('valor');
-     $marcado = (boolean)$request->input('marcado');
+       $tareaId = $request->input('valor');
+       $marcado = (boolean)$request->input('marcado');
 
-     $tareaModel = Tarea::find($tareaId);
-     $tareaModel->realizada = 0;
-     if($marcado){
+       $tareaModel = Tarea::find($tareaId);
+       $tareaModel->realizada = 0;
+       if($marcado){
         $tareaModel->realizada = 1;
-        return response()->json(['type'=> 'success', 'message' => 'Tarea marcada como Realizada']);
     } 
     $tareaModel->save();
+    return response()->json(['type'=> 'success', 'message' => 'Tarea marcada como Realizada']);
 
 }
 

@@ -17,7 +17,7 @@
            </div>
     </div>
        <footer class="row">
-               <div id="copyright">Jaime P. Bravo</div>
+               <div id="texto-footer" class="text-center">Desarrollado por Jaime P. Bravo</div>
        </footer>
     <script src="{{ asset('/js/jquery.min.js') }}"></script>   
     <script src="{{ asset('/js/bootstrap.min.js') }}"></script>   
