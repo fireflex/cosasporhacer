@@ -40,11 +40,15 @@ class UsuarioController extends Controller
         ->first();     
 
         if($validaLogin){
-            session(['logueado' => true, 'nombre' => $validaLogin->nombre]);
+            session([
+             'logueado' => true,
+             'usuarioId'=>$validaLogin->id,
+             'nombre' => $validaLogin->nombre]
+         );
             return response()->json(['type'=> 'success', 'message' => url('/').'/mistareas/']);
         } 
 
-         return response()->json(['type'=> 'error', 'message' => 'Los datos son incorrectos']);
+        return response()->json(['type'=> 'error', 'message' => 'Los datos son incorrectos']);
 
     }
 
@@ -102,5 +106,11 @@ class UsuarioController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function logout(Request $request)
+    {
+        $request->session()->flush();
+        return redirect()->action('UsuarioController@index');
     }
 }

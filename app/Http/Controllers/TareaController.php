@@ -20,13 +20,13 @@ class TareaController extends Controller
     public function index()
     {
         if (!session('logueado')) {
-           return redirect()->action('UsuarioController@index');
-       }
+         return redirect()->action('UsuarioController@index');
+     }
 
-       $categorias = Categoria::all();
-       $tareas = Tarea::all();
-       return \View::make("tareas.lista")->with(['categorias'=>$categorias, "tareas" => $tareas]);
-   }
+     $categorias = Categoria::all();
+     $tareas = Tarea::all();
+     return \View::make("tareas.lista")->with(['categorias'=>$categorias, "tareas" => $tareas]);
+ }
 
     /**
      * Show the form for creating a new resource.
@@ -52,7 +52,7 @@ class TareaController extends Controller
         $tareaModel = new Tarea;
         $tareaModel->tarea = $tarea;
         $tareaModel->categoria_id = $categoria_id;
-        $tareaModel->usuario_id = 1;
+        $tareaModel->usuario_id = session('usuarioId');
 
         if($tareaModel->save()){
             $tareaId = $tareaModel->id;
@@ -109,12 +109,12 @@ class TareaController extends Controller
 
     public function status(Request $request)
     {
-     $tareaId = $request->input('valor');
-     $marcado = (boolean)$request->input('marcado');
+       $tareaId = $request->input('valor');
+       $marcado = (boolean)$request->input('marcado');
 
-     $tareaModel = Tarea::find($tareaId);
-     $tareaModel->realizada = 0;
-     if($marcado){
+       $tareaModel = Tarea::find($tareaId);
+       $tareaModel->realizada = 0;
+       if($marcado){
         $tareaModel->realizada = 1;
     } 
     $tareaModel->save();
@@ -142,8 +142,9 @@ public function destroy(Request $request)
     $tareaId = $request->input('id');
     $tareaModel = Tarea::find($tareaId);
     if($tareaModel->delete()){
-       return response()->json(['type'=> 'success', 'message' => 'Tarea Borrada']); 
-    }
+     return response()->json(['type'=> 'success', 'message' => 'Tarea Borrada']); 
+ }
 
 }
+
 }

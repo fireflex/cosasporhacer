@@ -8,7 +8,7 @@
   </div>
   <div class="col-lg-6">
     <div id="logout">
-      <a href="#" class="btn btn-md btn-danger" title="Salir">Salir</a>
+      <a href="{{ url("/salir") }}" class="btn btn-md btn-danger" title="Salir">Salir</a>
     </div>
   </div>
 </div>

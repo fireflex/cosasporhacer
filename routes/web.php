@@ -13,6 +13,7 @@
 
 Route::get('/', array('uses' => 'UsuarioController@index'));
 Route::post('login', array('uses' => 'UsuarioController@login'));
+Route::get('salir', array('uses' => 'UsuarioController@logout'));
 
 Route::get('/mistareas', 'TareaController@index');
 Route::post('/mistareas/add', 'TareaController@store');
