@@ -12,8 +12,11 @@ APP para llevar el control de las tareas diarias.
 # Herramientas usadas:
 Bootstrap v3: https://getbootstrap.com/  
 Jquery v3.2: https://jquery.com/   
+Jqueryui: https://jqueryui.com/
 Bootstrap Typehead: https://github.com/bassjobsen/Bootstrap-3-Typeahead  
 Overhang (notificaciones): https://paulkr.github.io/overhang.js/  
 ParsleyJS (Validacion en el front):http://parsleyjs.org/  
+
+Deployment hecho en DigitalOcean. https://www.digitalocean.com/
 
 
