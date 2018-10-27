@@ -26,9 +26,11 @@ Parsley.addMessages('es', {
 });
 
 Parsley.setLocale('es');
+//Validacion de los forms
 $('#login').parsley();
 $('#crear-tarea').parsley();
 
+//Configuracion TOKEN AJAX
 $.ajaxSetup({
   headers: {
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -36,6 +38,7 @@ $.ajaxSetup({
 });
 
 
+// Formulario login de la APP
 $('#login').submit(function(event) {
   event.preventDefault();
   var dataLogin = $('#login').serialize();
@@ -50,22 +53,16 @@ $('#login').submit(function(event) {
      $("body").overhang({
       type: "error",
       message: response.message,
-      duration: 5,
+      duration: 3,
       upper: true
     });
    } else {
     window.location.replace(response.message);
   }
 })
-  .fail(function() {
-    console.log("error");
-  })
-  .always(function() {
-    console.log("complete");
-      //  window.location = baseUrl+'';
-    });
 });
 
+// Evento para crear una tarea.
 $('#crear-tarea').submit(function(event) {
   event.preventDefault();
   var dataTarea = $(this).serialize();
@@ -80,7 +77,7 @@ $('#crear-tarea').submit(function(event) {
      $("body").overhang({
       type: "error",
       message: response.message,
-      duration: 5,
+      duration: 3,
       upper: true
     });
    } else {
@@ -88,7 +85,7 @@ $('#crear-tarea').submit(function(event) {
     $("body").overhang({
       type: "success",
       message: response.message,
-      duration: 5,
+      duration: 3,
       upper: true
     });
   }
@@ -100,7 +97,7 @@ $('#crear-tarea').submit(function(event) {
     console.log("complete");
   });
 });
-
+// Para marcar una tarea como realizada.
 $('.marcar-tarea').on('click', function(event) {
   var check = $(this).is(':checked');
   var valor = $(this).val();
@@ -117,14 +114,14 @@ $('.marcar-tarea').on('click', function(event) {
        $("body").overhang({
         type: "error",
         message: response.message,
-        duration: 5,
+        duration: 3,
         upper: true
       });
      } else {
       $("body").overhang({
         type: "success",
         message: response.message,
-        duration: 4,
+       duration: 3,
         upper: true
       });
     }
@@ -141,6 +138,38 @@ $('.marcar-tarea').on('click', function(event) {
 
 } );
 
+//Eliminar una tarea
+$('.eliminar').on('click', function(event) {
+  event.preventDefault();
+  var id = $(this).attr('id');
+  $(this).parent().remove();
+  $.ajax({
+    url: '/mistareas/borrar',
+    type: 'POST',
+    dataType: 'json',
+    data: {id: id},
+  })
+  .done(function(response) {
+    if (response.type == 'error') {
+       $("body").overhang({
+        type: "error",
+        message: response.message,
+        duration: 3,
+        upper: true
+      });
+     } else {
+      $("body").overhang({
+        type: "error",
+        message: response.message,
+       duration: 3,
+        upper: true
+      });
+    }
+  })
+  
+});
+
+//Filtro de las tareas.
 $('#filtro').typeahead({
             source: function (query, result) {
                 $.ajax({
@@ -156,7 +185,6 @@ $('#filtro').typeahead({
                 });
             }
         });
-
 
 }); // End Jquery
 

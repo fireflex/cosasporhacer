@@ -137,9 +137,13 @@ public function search(Request $request)
     return response()->json([$arr]);
 }
 
-
-public function destroy($id)
+public function destroy(Request $request)
 {
-        //
+    $tareaId = $request->input('id');
+    $tareaModel = Tarea::find($tareaId);
+    if($tareaModel->delete()){
+       return response()->json(['type'=> 'success', 'message' => 'Tarea Borrada']); 
+    }
+
 }
 }
